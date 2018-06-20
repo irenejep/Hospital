@@ -12,3 +12,5 @@
 */
 
 Route::get('/', 'PatientController@index');
+Route::get('/getPatients', 'PatientController@get');
+Route::post('/savePatient','LessonsController@save');
