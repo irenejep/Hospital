@@ -24,7 +24,6 @@
                 <SELECT class='form-control'name="patientGender">
                 <OPTION Value="1">Male</OPTION>
                 <OPTION Value="2">Female</OPTION>
-                <OPTION Value="3">Other</OPTION>
                 </SELECT>         
             </div>
             <div class="inputButtons">
@@ -59,7 +58,7 @@
                 var responseObj = JSON.parse(jsonResponse);
                 var tableData = " ";
                 
-                tableData += "<button class = 'btn btn-primary' type='button' onclick= 'showInputForm()'>Add Patient</button><table class='table table-bordered table-striped table-condensed'><tr><th>id</th><th>Name</th><th>Description</th><th>Date of Birth</th><th>Gender</th><th colspan='4' align='center'>Actions</th></tr>";
+                tableData += "<button class = 'btn btn-primary' type='button' onclick= 'showInputForm()'>Add Patient</button><table class='table table-bordered table-striped table-condensed'><tr><th>id</th><th>Patient's name</th><th>ID Number</th><th>Date of Birth</th><th>Gender</th><th colspan='4' align='center'>Actions</th></tr>";
 
                 for (x in responseObj){
                 tableData +="<tr><td>" + responseObj[x].patient_id + "</td>";
@@ -121,7 +120,12 @@
             tableData +="<tr><td>" + responseObj.patient_fullname +"</td>";
             tableData +="<td>" + responseObj.patient_national_id +"</td>";
             tableData +="<td>" + responseObj.patient_dob +"</td>";
-            tableData +="<td>" + responseObj.patient_gender +"</td></tr>";
+            if(responseObj.patient_gender == 1){
+                tableData +="<td>" + "Male" + "</td>";
+            }
+            else if(responseObj.patient_gender == 2){
+                tableData +="<td>" + "Female" + "</td>";
+            }
             tableData +="<button class='btn btn-warning'type='button' onclick='getPatients()'>Back</button>";
             document.getElementById("allPatients").innerHTML = tableData;
          tableData +="</table>"
