@@ -17,7 +17,7 @@
             </div>
             <div class="inputItems">
                 <label>Date of birth:</label>
-                <input class='form-control' type="text" name="patientDob"/>
+                <input class='form-control' type="date" name="patientDob"/>
             </div>
             <div class="inputItems">
                 Gender:
@@ -80,7 +80,7 @@
                 document.getElementById("allPatients").innerHTML = tableData;
 
             }
-            function getPatients(patient_id)
+            function getPatients()
             {
                 createObject(displayPatients, method[1], baseUrl + "/getPatients");
                 document.getElementById("allPatients").style.display="block"; 
@@ -91,7 +91,7 @@
                 document.getElementById("allPatients").style.display="none";
             }
             function showPatient(patient_id){
-                createObject(displaySinglePatient, method[1], baseUrl + "getSinglePatient/" + id);
+                createObject(displaySinglePatient, method[1], baseUrl + "getSinglePatient/" + patient_id);
             }
             function submitPatient(e)
             {
@@ -105,6 +105,7 @@
                 if((patientFullName !="") && (patientNationalId !="") && (patientDob !="") && (patientGender !=""))
                 {
                     var sendData = "patient_fullname="+patientFullName+"&patient_national_id="+patientNationalId+"&patient_dob="+patientDob+"&patient_gender="+patientGender;
+                    console.log(sendData);
                     createObject(getPatients, method[0], baseUrl + "savePatient", sendData);
                     // console.log(JSON.stringify(sendData));
                 }
@@ -116,10 +117,10 @@
         {
             var responseObj = JSON.parse(jsonResponse);
             var tData, count = 0;
-            var tableData ="<table class='table'><tr><th>Patient's name</th><th>ID Number</th><th>Date of Birth</th><th>Gender/th></tr>";
+            var tableData ="<table class='table'><tr><th>Patient's name</th><th>ID Number</th><th>Date of Birth</th><th>Gender</th></tr>";
             tableData +="<tr><td>" + responseObj.patient_fullname +"</td>";
-            tableData +="<tr><td>" + responseObj.Patient_national_id +"</td>";
-            tableData +="<tr><td>" + responseObj.patient_dob +"</td>";
+            tableData +="<td>" + responseObj.patient_national_id +"</td>";
+            tableData +="<td>" + responseObj.patient_dob +"</td>";
             tableData +="<td>" + responseObj.patient_gender +"</td></tr>";
             tableData +="<button class='btn btn-warning'type='button' onclick='getPatients()'>Back</button>";
             document.getElementById("allPatients").innerHTML = tableData;

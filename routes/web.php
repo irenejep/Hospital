@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'PatientController@index');
-Route::get('/getPatients', 'PatientController@get');
-Route::post('/savePatient','PatientController@save');
-Route::get('/getSinglePatient/{id}', 'PatientController@getSingle');
+Route::get('/', 'PatientsController@index');
+Route::get('/getPatients', 'PatientsController@get');
+Route::post('/savePatient','PatientsController@save');
+Route::get('/getSinglePatient/{id}', 'PatientsController@getSingle');

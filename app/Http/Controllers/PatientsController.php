@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Patient;
 
-class PatientController extends Controller
+class PatientsController extends Controller
 {
         public function index(){
             return view('patients');

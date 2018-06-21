@@ -19,6 +19,7 @@ class Patient extends Migration
             $table->string('patient_national_id');
             $table->date('patient_dob');
             $table->tinyInteger('patient_gender');
+            $table->timestamps();
         });
         // function tinyInteger($column, $autoIncrement = false, $unsigned = false)
         // {
