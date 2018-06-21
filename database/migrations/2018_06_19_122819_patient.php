@@ -14,16 +14,16 @@ class Patient extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->integer('patientId')->unsigned;
-            $table->string('patientFullName', 30);
-            $table->string('patientNationalId', 30);
-            $table->date('patientDob');
-            $table->tinyInteger('patientGender', 1);
+            $table->increments('patient_id');
+            $table->string('patient_fullname');
+            $table->string('patient_national_id');
+            $table->date('patient_dob');
+            $table->tinyInteger('patient_gender');
         });
-        function tinyInteger($column, $autoIncrement = false, $unsigned = false)
-        {
-            return $this->addColumn('tinyInteger', $column, compact('autoIncrement', 'unsigned'));
-        }
+        // function tinyInteger($column, $autoIncrement = false, $unsigned = false)
+        // {
+        //     return $this->addColumn('tinyInteger', $column, compact('autoIncrement', 'unsigned'));
+        // }
     }
 
     /**

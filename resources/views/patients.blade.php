@@ -3,6 +3,7 @@
 @section("content")
     <div id="inputForm">
         <form class="form-horizontal" action="#" method="POST"id="savePatient" name="patients">
+        @csrf
             <div class="inputItems">
             <input class= "form-control" type="hidden" name="lessonId" required>
             </div>
@@ -19,16 +20,15 @@
                 <input class='form-control' type="text" name="patientDob"/>
             </div>
             <div class="inputItems">
-                <label>Gender:</label>
-                <input class='form-control' name="patientGender"/>
-                <SELECT>
+                Gender:
+                <SELECT class='form-control'name="patientGender">
                 <OPTION Value="1">Male</OPTION>
                 <OPTION Value="2">Female</OPTION>
                 <OPTION Value="3">Other</OPTION>
                 </SELECT>         
             </div>
             <div class="inputButtons">
-                <button class='btn btn-warning'type="button">Cancel</button>
+                <button class='btn btn-warning'type="button"onclick='getPatients()'>Cancel</button>
                 <button class='btn btn-primary'type="submit">Save Patient</button>
             </div>
         </form>
@@ -62,17 +62,17 @@
                 tableData += "<button class = 'btn btn-primary' type='button' onclick= 'showInputForm()'>Add Patient</button><table class='table table-bordered table-striped table-condensed'><tr><th>id</th><th>Name</th><th>Description</th><th>Date of Birth</th><th>Gender</th><th colspan='4' align='center'>Actions</th></tr>";
 
                 for (x in responseObj){
-                tableData +="<tr><td>" + responseObj[x].patientId + "</td>";
-                tableData +="<td>" + responseObj[x].patientFullName + "</td>";
-                tableData +="<td>" + responseObj[x].patientNationalId + "</td>";
-                tableData +="<td>" + responseObj[x].patientDob + "</td>";
-                if(responseObj[x].patientGender == 1){
+                tableData +="<tr><td>" + responseObj[x].patient_id + "</td>";
+                tableData +="<td>" + responseObj[x].patient_fullname + "</td>";
+                tableData +="<td>" + responseObj[x].patient_national_id + "</td>";
+                tableData +="<td>" + responseObj[x].patient_dob + "</td>";
+                if(responseObj[x].patient_gender == 1){
                 tableData +="<td>" + "Male" + "</td>";
                 }
-                else if(responseObj[x].patientGender == 2){
+                else if(responseObj[x].patient_gender == 2){
                 tableData +="<td>" + "Female" + "</td>";
                 }
-                tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'getSingleLesson(" + responseObj[x].id + ")'>View</a></td>";
+                tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showPatient(" + responseObj[x].patient_id + ")'>View</a></td>";
                 tableData +="<td><a href='#' class= 'btn btn-success btn-sm' onclick='updateSingleLesson(" + responseObj[x].id + ",\"" + responseObj[x].name + "\",\"" + responseObj[x].description + "\")'>Edit</a></td>";
                 tableData +="<td><a href='#' class= 'btn btn-danger btn-sm'onclick='deleteSingleLesson(" + responseObj[x].id + ",\"" + responseObj[x].name + "\")'>Delete</a></td>";
                 } 
@@ -80,7 +80,7 @@
                 document.getElementById("allPatients").innerHTML = tableData;
 
             }
-            function getPatients()
+            function getPatients(patient_id)
             {
                 createObject(displayPatients, method[1], baseUrl + "/getPatients");
                 document.getElementById("allPatients").style.display="block"; 
@@ -90,7 +90,10 @@
                 document.getElementById("inputForm").style.display="block";
                 document.getElementById("allPatients").style.display="none";
             }
-            function submitLesson(e)
+            function showPatient(patient_id){
+                createObject(displaySinglePatient, method[1], baseUrl + "getSinglePatient/" + id);
+            }
+            function submitPatient(e)
             {
                 e.preventDefault();
                 //get values submitted
@@ -101,15 +104,27 @@
                     //validate values
                 if((patientFullName !="") && (patientNationalId !="") && (patientDob !="") && (patientGender !=""))
                 {
-                    var sendData = "patientFullName="+patientFullName+"&patientNationalId="
-                    +patientNationalId+"patientDob="+patientDob+"patientGender="+patientGender+;
+                    var sendData = "patient_fullname="+patientFullName+"&patient_national_id="+patientNationalId+"&patient_dob="+patientDob+"&patient_gender="+patientGender;
                     createObject(getPatients, method[0], baseUrl + "savePatient", sendData);
-                    console.log(JSON.stringify(sendData));
+                    // console.log(JSON.stringify(sendData));
                 }
                 else{
                     alert("invalid input");
                 }
             }
+            function displaySinglePatient(jsonResponse)
+        {
+            var responseObj = JSON.parse(jsonResponse);
+            var tData, count = 0;
+            var tableData ="<table class='table'><tr><th>Patient's name</th><th>ID Number</th><th>Date of Birth</th><th>Gender/th></tr>";
+            tableData +="<tr><td>" + responseObj.patient_fullname +"</td>";
+            tableData +="<tr><td>" + responseObj.Patient_national_id +"</td>";
+            tableData +="<tr><td>" + responseObj.patient_dob +"</td>";
+            tableData +="<td>" + responseObj.patient_gender +"</td></tr>";
+            tableData +="<button class='btn btn-warning'type='button' onclick='getPatients()'>Back</button>";
+            document.getElementById("allPatients").innerHTML = tableData;
+         tableData +="</table>"
+        }
             document.getElementById("savePatient").addEventListener("submit", submitPatient);
         </script>
 

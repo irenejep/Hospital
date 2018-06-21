@@ -13,20 +13,23 @@ class PatientController extends Controller
         }
         public function save(Request $request){
             $this->validate($request,[
-            'patientFullName'=>'required',
-            'patientNationalId'=>'required',
-            'patientDob'=>'required',
-            'patientGender'=>'required',
+            'patient_fullname'=>'required',
+            'patient_national_id'=>'required',
+            'patient_dob'=>'required',
+            'patient_gender'=>'required',
             ]);
             $patient = new Patient();
-            $patient->patientFullName = $request->input('patientFullName');
-            $patient->patientNationalId = $request->input('patientNationalId');
-            $patient->patientDob = $request->input('patientDob');
-            $patient->patientGender = $request->input('patientGender');
+            $patient->patient_fullname = $request->patient_fullname;
+            $patient->patient_national_id = $request->patient_national_id;
+            $patient->patient_dob = $request->patient_dob;
+            $patient->patient_gender = $request->patient_gender;
             $patient->save();
         }
         public function get(){
             echo Patient::all();
-           
+        }
+        public function getSingle($patient_id){
+            $patient = Patient::find($patient_id);
+        echo json_encode ($patient);
         }
 }
