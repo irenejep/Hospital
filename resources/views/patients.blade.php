@@ -93,7 +93,7 @@
                 tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showPatient(" + responseObj[x].patient_id + ")'>View</a></td>";
                 tableData +="<td><a href='#' class= 'btn btn-success btn-sm' onclick='editPatient("+ responseObj[x].patient_id +",\""+ responseObj[x].patient_fullname +"\",\""+ responseObj[x].patient_national_id +"\",\""+ responseObj[x].patient_dob +"\",\""+ responseObj[x].patient_gender+
                 "\")'>Edit</a></td>";
-                tableData +="<td><a href='#' class= 'btn btn-danger btn-sm'onclick='deleteSingleLesson(" + responseObj[x].id + ",\"" + responseObj[x].name + "\")'>Delete</a></td>";
+                tableData +="<td><a href='#' class= 'btn btn-danger btn-sm'onclick='deletePatient(" + responseObj[x].patient_id + ",\"" + responseObj[x].patient_fullname + "\")'>Delete</a></td>";
                 } 
                 "</table>";
                 document.getElementById("allPatients").innerHTML = tableData;
@@ -104,10 +104,17 @@
                 createObject(displayPatients, method[1], baseUrl + "/getPatients");
                 document.getElementById("allPatients").style.display="block"; 
                 document.getElementById("inputForm").style.display="none";
+                document.getElementById("updateForm").style.display="none";
+
             }
             function showInputForm(){
                 document.getElementById("inputForm").style.display="block";
                 document.getElementById("allPatients").style.display="none";
+            }
+            function hideInputForm(){
+                document.getElementById("inputForm").style.display="none";
+                document.getElementById("allPatients").style.display="block";
+                document.getElementById("updateForm").style.display="none";
             }
             function showPatient(patient_id){
                 createObject(displaySinglePatient, method[1], baseUrl + "getSinglePatient/" + patient_id);
@@ -153,14 +160,36 @@
         function editPatient(patient_id, patient_fullname, patient_national_id,patient_dob,patient_gender){
             document.getElementById("allPatients").style.display="none";
             document.getElementById("updateForm").style.display="block";
-            console.log(patient_id + patient_fullname + patient_gender);
             document.forms["upForm"]["patientId"].value = patient_id;
             document.getElementById('patientFullName').value = patient_fullname;
             document.forms["upForm"]["patientNationalId"].value = patient_national_id;
             document.forms["upForm"]["patientDob"].value = patient_dob;
             document.forms["upForm"]["patientGender"].value = patient_gender;
         }
+        function updatePatient(e){
+            e.preventDefault();
+            var patientId = document.forms["upForm"]["patientId"].value;
+            var patientFullname = document.getElementById('patientFullName').value;
+            var patientNationalId = document.forms["upForm"]["patientNationalId"].value;
+            var patientDob = document.forms["upForm"]["patientDob"].value;
+            var patientGender= document.forms["upForm"]["patientGender"].value;
+            var sendData = "patient_gender="+patientGender+"&patient_dob="+patientDob+"&patient_fullname="+patientFullname+"&patient_national_id="+patientNationalId+"&patient_id="+patientId;
+            console.log(sendData);
+            createObject(getPatients, method[0], baseUrl + "updatePatient", sendData);
+        }
+        function deletePatient(patient_id, patient_name){
+            var txt;
+            if (confirm("Are you sure you want to delete" +" "+patient_name +"?")) {
+            txt = "You pressed OK!";
+            createObject(getPatients, method[1], baseUrl + "deletePatient/" + patient_id)
+            alert("you have deleted"+patient_name);
+             }
+            else {
+                txt = "You pressed Cancel!";
+            } 
+        }
             document.getElementById("savePatient").addEventListener("submit", submitPatient);
+            document.getElementById("updateForm1").addEventListener("submit", updatePatient);
         </script>
 
 @endsection

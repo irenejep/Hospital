@@ -8,7 +8,7 @@ use App\Patient;
 
 class PatientsController extends Controller
 {
-        public function index(){
+        public function patients(){
             return view('patients');
         }
         public function save(Request $request){
@@ -28,8 +28,28 @@ class PatientsController extends Controller
         public function get(){
             echo Patient::all();
         }
+        public function update(Request $request){
+            $this->validate($request,[
+                'patient_fullname'=>'required',
+                'patient_national_id'=>'required',
+                'patient_dob'=>'required',
+                'patient_gender'=>'required'
+                ]);
+            $patient_id = $request->input('patient_id');
+            $patient = Patient::findOrFail($patient_id);
+            $patient->patient_fullname = $request->input('patient_fullname');
+            $patient->patient_national_id = $request->input('patient_national_id');
+            $patient->patient_dob = $request->input('patient_dob');
+            $patient->patient_gender = $request->input('patient_gender');
+            $patient->save();
+            }
         public function getSingle($patient_id){
             $patient = Patient::find($patient_id);
         echo json_encode ($patient);
+        }
+        public function delete(Patient $patient_id){
+            $patient_id->delete();
+            $patient = Patient::all();
+            echo $patient;
         }
 }

@@ -10,8 +10,18 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', 'PatientsController@index');
+//patients
+Route::get('/patients', 'PatientsController@patients');
 Route::get('/getPatients', 'PatientsController@get');
 Route::post('/savePatient','PatientsController@save');
 Route::get('/getSinglePatient/{id}', 'PatientsController@getSingle');
+Route::get('/deletePatient/{patient_id}', 'PatientsController@delete');
+Route::post('/updatePatient', 'PatientsController@update');
+
+//services
+Route::get('/services', 'ServiceController@services');
+Route::get('/getServices', 'ServiceController@get');
+Route::post('/saveService','ServiceController@save');
+Route::get('/getSingleService/{id}', 'ServiceController@getSingle');
+Route::get('/deleteService/{service_id}', 'ServiceController@delete');
+Route::post('/updateService', 'ServiceController@update');
