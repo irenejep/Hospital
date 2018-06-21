@@ -152,7 +152,7 @@
         }
         function editPatient(patient_id, patient_fullname, patient_national_id,patient_dob,patient_gender){
             document.getElementById("allPatients").style.display="none";
-            // document.getElementById("updateForm").style.display="block";
+            document.getElementById("updateForm").style.display="block";
             console.log(patient_id + patient_fullname + patient_gender);
             document.forms["upForm"]["patientId"].value = patient_id;
             document.getElementById('patientFullName').value = patient_fullname;
