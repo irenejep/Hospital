@@ -32,6 +32,25 @@
             </div>
         </form>
     </div>
+    <div id="updateForm">
+        <form class='form-horizontal' action="#" method="POST" id="updateForm1" name="upForm">
+        @csrf
+            <input class= "form-control" type="hidden" name="patientId" required>
+                <label>Patient's Name:</label>
+                <input class='form-control' type="text" id="patientFullName" />
+                <label>ID Number:</label>
+                <input class='form-control' type="text" name="patientNationalId"/>
+                <label>Date of birth:</label>
+                <input class='form-control' type="date" name="patientDob"/>
+                Gender:
+                <SELECT class='form-control'name="patientGender">
+                <OPTION Value="1">Male</OPTION>
+                <OPTION Value="2">Female</OPTION>
+                </SELECT>         
+            <button class='btn btn-info' type="submit">Update</button>
+            <button class='btn btn-warning'type="button" onclick="hideInputForm()">Cancel</button>
+        </form>
+    </div>
     <div id="allPatients"></div>
         <script type ="text/javascript">
             var method = ["POST", "GET"];
@@ -72,7 +91,8 @@
                 tableData +="<td>" + "Female" + "</td>";
                 }
                 tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showPatient(" + responseObj[x].patient_id + ")'>View</a></td>";
-                tableData +="<td><a href='#' class= 'btn btn-success btn-sm' onclick='updateSingleLesson(" + responseObj[x].id + ",\"" + responseObj[x].name + "\",\"" + responseObj[x].description + "\")'>Edit</a></td>";
+                tableData +="<td><a href='#' class= 'btn btn-success btn-sm' onclick='editPatient("+ responseObj[x].patient_id +",\""+ responseObj[x].patient_fullname +"\",\""+ responseObj[x].patient_national_id +"\",\""+ responseObj[x].patient_dob +"\",\""+ responseObj[x].patient_gender+
+                "\")'>Edit</a></td>";
                 tableData +="<td><a href='#' class= 'btn btn-danger btn-sm'onclick='deleteSingleLesson(" + responseObj[x].id + ",\"" + responseObj[x].name + "\")'>Delete</a></td>";
                 } 
                 "</table>";
@@ -129,6 +149,16 @@
             tableData +="<button class='btn btn-warning'type='button' onclick='getPatients()'>Back</button>";
             document.getElementById("allPatients").innerHTML = tableData;
          tableData +="</table>"
+        }
+        function editPatient(patient_id, patient_fullname, patient_national_id,patient_dob,patient_gender){
+            document.getElementById("allPatients").style.display="none";
+            // document.getElementById("updateForm").style.display="block";
+            console.log(patient_id + patient_fullname + patient_gender);
+            document.forms["upForm"]["patientId"].value = patient_id;
+            document.getElementById('patientFullName').value = patient_fullname;
+            document.forms["upForm"]["patientNationalId"].value = patient_national_id;
+            document.forms["upForm"]["patientDob"].value = patient_dob;
+            document.forms["upForm"]["patientGender"].value = patient_gender;
         }
             document.getElementById("savePatient").addEventListener("submit", submitPatient);
         </script>
