@@ -16,6 +16,8 @@ class VerifyCsrfToken extends Middleware
         '/savePatient',
         '/updatePatient',
         '/saveService',
-        '/updateService'
+        '/updateService',
+        '/saveVisit',
+        '/updateVisit',
     ];
 }

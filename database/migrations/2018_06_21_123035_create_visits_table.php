@@ -13,8 +13,14 @@ class CreateVisitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('visit', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('visits', function (Blueprint $table) {
+            $table->increments('visit_id');
+            $table->dateTime('visit_date');
+            $table->foreign('patient_id')->references('patient_id')->on('patients');
+            $table->integer('patient_id')->unsigned();
+            $table->tinyInteger('visit_type');
+            $table->dateTime('visit_exit_time');
+            $table->tinyInteger('visit_status');
             $table->timestamps();
         });
     }

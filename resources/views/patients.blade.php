@@ -1,6 +1,46 @@
 @extends("layouts.master")
 
 @section("content")
+<div id="visitInputForm">
+        <form class="form-horizontal" action="#" method="POST"id="saveVisit" name="visits">
+        @csrf
+        <div class="inputItems">
+            <input class= "form-control" type="hidden" name="patientId">
+            </div>
+            <div class="inputItems">
+            <input class= "form-control" type="hidden" name="visitId">
+            </div>
+            <div class="inputItems">
+                <label>Date of visit:</label>
+                <input class='form-control' type="datetime" name="visitDate"/>
+            </div>
+            <div class="inputItems">
+                Type of visit:
+                <SELECT class='form-control'name="visitType">
+                <OPTION Value="1">Insurance</OPTION>
+                <OPTION Value="2">NHIF</OPTION>
+                <OPTION Value="3">Cash</OPTION>
+                </SELECT>         
+            </div>
+            <div class="inputItems">
+                <label>Time of exit:</label>
+                <input class='form-control' type="datetime" name="visitExitTime"/>
+            </div>
+            <div class="inputItems">
+                Visit Status:
+                <SELECT class='form-control'name="visitStatus">
+                <OPTION Value="1">Done</OPTION>
+                <OPTION Value="2">In process</OPTION>
+                <OPTION Value="3">Admitted to ward</OPTION>
+                </SELECT>         
+            </div>
+            <div class="inputButtons">
+                <button class='btn btn-warning'type="button"onclick='getPatients()'>Cancel</button>
+                <button class='btn btn-primary'type="submit">Save visit </button>
+            </div>
+        </form>
+    </div>
+
     <div id="inputForm">
         <form class="form-horizontal" action="#" method="POST"id="savePatient" name="patients">
         @csrf
@@ -37,16 +77,16 @@
         @csrf
             <input class= "form-control" type="hidden" name="patientId" required>
                 <label>Patient's Name:</label>
-                <input class='form-control' type="text" id="patientFullName" />
+            <input class='form-control' type="text" id="patientFullName" />
                 <label>ID Number:</label>
-                <input class='form-control' type="text" name="patientNationalId"/>
+            <input class='form-control' type="text" name="patientNationalId"/>
                 <label>Date of birth:</label>
-                <input class='form-control' type="date" name="patientDob"/>
+            <input class='form-control' type="date" name="patientDob"/>
                 Gender:
-                <SELECT class='form-control'name="patientGender">
-                <OPTION Value="1">Male</OPTION>
-                <OPTION Value="2">Female</OPTION>
-                </SELECT>         
+                    <SELECT class='form-control'name="patientGender">
+                    <OPTION Value="1">Male</OPTION>
+                    <OPTION Value="2">Female</OPTION>
+                    </SELECT>         
             <button class='btn btn-info' type="submit">Update</button>
             <button class='btn btn-warning'type="button" onclick="hideInputForm()">Cancel</button>
         </form>
@@ -77,7 +117,7 @@
                 var responseObj = JSON.parse(jsonResponse);
                 var tableData = " ";
                 
-                tableData += "<button class = 'btn btn-primary' type='button' onclick= 'showInputForm()'>Add Patient</button><table class='table table-bordered table-striped table-condensed'><tr><th>id</th><th>Patient's name</th><th>ID Number</th><th>Date of Birth</th><th>Gender</th><th colspan='4' align='center'>Actions</th></tr>";
+                tableData += "<button class = 'btn btn-primary' type='button' onclick= 'showInputForm()'>Add Patient</button><table class='table table-bordered table-striped table-condensed'><tr><th>id</th><th>Patient's name</th><th>ID Number</th><th>Date of Birth</th><th>Gender</th><th colspan='4' text-align='center'>Actions</th></tr>";
 
                 for (x in responseObj){
                 tableData +="<tr><td>" + responseObj[x].patient_id + "</td>";
@@ -90,6 +130,25 @@
                 else if(responseObj[x].patient_gender == 2){
                 tableData +="<td>" + "Female" + "</td>";
                 }
+                if(responseObj[x].visit_type == 1){
+                tableData +="<td>" + "Insurance" + "</td>";
+                }
+                else if(responseObj[x].visit_type == 2){
+                tableData +="<td>" + "NHIF" + "</td>";
+                }
+                else if(responseObj[x].visit_type == 3){
+                tableData +="<td>" + "Cash" + "</td>";
+                }
+                if(responseObj[x].visit_status == 1){
+                tableData +="<td>" + "Done" + "</td>";
+                }
+                else if(responseObj[x].visit_status == 2){
+                tableData +="<td>" + "In process" + "</td>";
+                }
+                else if(responseObj[x].visit_status == 3){
+                tableData +="<td>" + "Admitted to ward" + "</td>";
+                }
+                tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showVisitInputForm(" + responseObj[x].patient_id + ")'>Create Visit</a></td>";
                 tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showPatient(" + responseObj[x].patient_id + ")'>View</a></td>";
                 tableData +="<td><a href='#' class= 'btn btn-success btn-sm' onclick='editPatient("+ responseObj[x].patient_id +",\""+ responseObj[x].patient_fullname +"\",\""+ responseObj[x].patient_national_id +"\",\""+ responseObj[x].patient_dob +"\",\""+ responseObj[x].patient_gender+
                 "\")'>Edit</a></td>";
@@ -105,14 +164,25 @@
                 document.getElementById("allPatients").style.display="block"; 
                 document.getElementById("inputForm").style.display="none";
                 document.getElementById("updateForm").style.display="none";
-
+                document.getElementById("visitInputForm").style.display="none";
             }
+                console.log(getPatients());
             function showInputForm(){
                 document.getElementById("inputForm").style.display="block";
                 document.getElementById("allPatients").style.display="none";
+                document.getElementById("visitInputForm").style.display="none";
             }
+
+            function showVisitInputForm(patient_id){
+                document.getElementById("visitInputForm").style.display="block";
+                document.getElementById("inputForm").style.display="none";
+                document.getElementById("allPatients").style.display="none";
+                document.forms["visits"]["patientId"].value = patient_id;
+            }
+
             function hideInputForm(){
                 document.getElementById("inputForm").style.display="none";
+                document.getElementById("visitInputForm").style.display="none";
                 document.getElementById("allPatients").style.display="block";
                 document.getElementById("updateForm").style.display="none";
             }
@@ -188,7 +258,29 @@
                 txt = "You pressed Cancel!";
             } 
         }
+        function submitVisit(e)
+            {
+                e.preventDefault();
+                //get values submitted
+                var patientId = document.forms["visits"]["patientId"].value;
+                var visitDate = document.forms["visits"]["visitDate"].value;
+                var visitType = document.forms["visits"]["visitType"].value;
+                var visitExitTime = document.forms["visits"]["visitExitTime"].value;
+                var visitStatus = document.forms["visits"]["visitStatus"].value;
+                    //validate values
+                if((visitDate !="") && (visitType !="") && (visitExitTime !="") && (visitStatus !=""))
+                {
+                    var sendData = "patient_id="+patientId+"&visit_date="+visitDate+"&visit_type="+visitType+"&visit_exit_time="+visitExitTime+"&visit_status="+visitStatus;
+                    console.log(sendData);
+                    createObject(getPatients, method[0], baseUrl + "saveVisit", sendData);
+                    // console.log(JSON.stringify(sendData));
+                }
+                else{
+                    alert("invalid input");
+                }
+            }
             document.getElementById("savePatient").addEventListener("submit", submitPatient);
+            document.getElementById("saveVisit").addEventListener("submit", submitVisit);
             document.getElementById("updateForm1").addEventListener("submit", updatePatient);
         </script>
 

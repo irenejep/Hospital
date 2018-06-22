@@ -8,10 +8,13 @@
 				<a class="nav-link" href="services">Services</a>
 			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="#">Visits</a>
+				<a class="nav-link" href="visits">Visits</a>
 			</li>
 			<li class="nav-item active">
 				<a class="nav-link" href="#">Bills</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Reports</a>
 			</li>
 		</ul>
 	</div>
