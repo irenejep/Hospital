@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css" >
 		<title>Hospital Management System</title>
 	</head>
-	<body onload='getPatients()'>
+	<body>
 		@include('layouts.nav')
         <div class="container">
             @yield("content")

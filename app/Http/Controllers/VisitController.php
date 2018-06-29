@@ -20,11 +20,17 @@ class VisitController extends Controller
         ]);
         $visit = new Visit();
         $visit->patient_id = $request->patient_id;
+        $visit->patient_name = $request->patient_name;
         $visit->visit_date = $request->visit_date;
         $visit->visit_type = $request->visit_type;
         $visit->visit_exit_time = $request->visit_exit_time;
         $visit->visit_status = $request->visit_status;
         $visit->save();
+        $visit = \DB::table('visit')
+        ->join('patient', 'patient.patient_id', '=', 'visit.patient_id')
+        ->select('patient.patient_name')
+        ->where ('patient.patient_id','patient_id')
+        ->get();
     }
     public function get(){
         echo Visit::all();

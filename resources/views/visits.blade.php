@@ -1,6 +1,31 @@
-@extends("layouts.visitmaster")
+@extends("layouts.master")
 
 @section("content")
+<body onload="getVisits">
+
+    <div id="billInputForm">
+        <form class="form-horizontal" action="#" method="POST"id="saveBill" name="bills">
+        @csrf
+            <div class="inputItems">
+                <input class= "form-control" type="hidden" name="visitServiceId">
+            </div>
+            <div class="inputItems">
+                <input class= "form-control" type="hidden" name="visitId">
+            </div>
+            <div class="inputItems">
+                <label>Amount:</label>
+                <input class='form-control' type="datetime" name="amount" placeholder="yyyy-mm-dd hh:mm:ss"/>
+            </div>
+            <div class="inputItems">
+                <label>Quantity:</label>
+                <input class='form-control' type="datetime" name="quantity"/>
+            </div>
+            <div class="inputItems">
+                <label>Bill Time:</label>
+                <input class='form-control' type="datetime" name="billTime" placeholder="yyyy-mm-dd hh:mm:ss"/>
+            </div>
+        </form>
+    </div>
 
     <div id="updateForm">
         <form class='form-horizontal' action="#" method="POST" id="updateForm1" name="upForm">
@@ -65,7 +90,7 @@
                 var responseObj = JSON.parse(jsonResponse);
                 var tableData = " ";
                 
-                tableData += "<table class='table table-bordered table-striped table-condensed'><tr><th>id</th><th>Patient Id</th><th>Visit date</th><th>Visit type</th><th>Exit time</th><th>Visit status</th><th colspan='4' text-align='center'>Actions</th></tr>";
+                tableData += "<table class='table table-bordered table-striped table-condensed'><tr><th>Visit id</th><th>Patient Id</th><th>Visit date</th><th>Visit type</th><th>Exit time</th><th>Visit status</th><th colspan='4' text-align='center'>Actions</th></tr>";
 
                 for (x in responseObj){
                     tableData +="<tr><td>" + responseObj[x].visit_id + "</td>";
@@ -90,7 +115,6 @@
                     else if(responseObj[x].visit_status == 3){
                         tableData +="<td>" + "Admitted to ward" + "</td>";
                     }
-                    // tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showVisitInputForm(" + responseObj[x].patient_id + ")'>Create Visit</a></td>";
                     tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showVisit(" + responseObj[x].visit_id + ")'>View</a></td>";
                     tableData +="<td><a href='#' class= 'btn btn-success btn-sm' onclick='editVisit("+ responseObj[x].visit_id +",\""+ responseObj[x].visit_date +"\",\""+ responseObj[x].visit_type +"\",\""+ responseObj[x].visit_exit_time +"\",\""+ responseObj[x].visit_status+
                     "\")'>Edit</a></td>";
@@ -104,30 +128,9 @@
             {
                 createObject(displayVisits, method[1], baseUrl + "/getVisits");
                 document.getElementById("allVisits").style.display="block"; 
-                // document.getElementById("inputForm").style.display="none";
                 document.getElementById("updateForm").style.display="none";
-                // document.getElementById("visitInputForm").style.display="none";
             }
 
-            // function showInputForm(){
-            //     document.getElementById("inputForm").style.display="block";
-            //     document.getElementById("allVisits").style.display="none";
-                // document.getElementById("visitInputForm").style.display="none";
-            // }
-
-            // function showVisitInputForm(patient_id){
-            //     document.getElementById("visitInputForm").style.display="block";
-            //     document.getElementById("inputForm").style.display="none";
-            //     document.getElementById("allPatients").style.display="none";
-            //     document.forms["visits"]["patientId"].value = patient_id;
-            // }
-
-            // function hideInputForm(){
-            //     document.getElementById("inputForm").style.display="none";
-            //     document.getElementById("visitInputForm").style.display="none";
-            //     document.getElementById("allPatients").style.display="block";
-            //     document.getElementById("updateForm").style.display="none";
-            // }
             function showVisit(visit_id){
                 document.getElementById("allVisits").style.display="block"; 
                 document.getElementById("updateForm").style.display="none";
@@ -196,29 +199,30 @@
                     txt = "You pressed Cancel!";
                 } 
             }
-            // function submitVisit(e)
-            // {
-            //     e.preventDefault();
-            //     //get values submitted
-            //     var patientId = document.forms["visits"]["patientId"].value;
-            //     var visitDate = document.forms["visits"]["visitDate"].value;
-            //     var visitType = document.forms["visits"]["visitType"].value;
-            //     var visitExitTime = document.forms["visits"]["visitExitTime"].value;
-            //     var visitStatus = document.forms["visits"]["visitStatus"].value;
-            //         //validate values
-            //     if((visitDate !="") && (visitType !="") && (visitExitTime !="") && (visitStatus !=""))
-            //     {
-            //         var sendData = "patient_id="+patientId+"&visit_date="+visitDate+"&visit_type="+visitType+"&visit_exit_time="+visitExitTime+"&visit_status="+visitStatus;
-            //         console.log(sendData);
-            //         createObject(getvisits, method[0], baseUrl + "saveVisit", sendData);
-            //         // console.log(JSON.stringify(sendData));
-            //     }
-            //     else{
-            //         alert("invalid input");
-            //     }
-            // }
-            // document.getElementById("savePatient").addEventListener("submit", submitPatient);
-            // document.getElementById("saveVisit").addEventListener("submit", submitVisit);
+            function submitVisit(e)
+            {
+                e.preventDefault();
+                //get values submitted
+                var visitServiceId = document.forms["bills"]["visitServiceId"].value;
+                var visitId = document.forms["bills"]["visitId"].value;
+                var amount = document.forms["bills"]["amount"].value;
+                var quantity = document.forms["bills"]["quantity"].value;
+                var billTime = document.forms["bills"]["billTime"].value;
+                var serviceId =document.forms["bills"]["serviceId"].value;
+                var serviceName = document.forms["bills"]["serviceName"].value;
+                    //validate values
+                if((amount !="") && (quantity !="") && (billTime !=""))
+                {
+                    var sendData ="visit_service_id ="+visitServiceId+ "&service_id ="+serviceId+ "&visit_id ="+visitId+"&visit_service_amount ="+amount+"&quantity ="+quantity+"&visit_service_bill_time="+billTime;
+                    console.log(sendData);
+                    createObject(getVisits, method[0], baseUrl + "saveBill", sendData);
+                    // console.log(JSON.stringify(sendData));
+                }
+                else{
+                    alert("invalid input");
+                }
+            }
+            
             document.getElementById("updateForm1").addEventListener("submit", updateVisit);
         </script>
 

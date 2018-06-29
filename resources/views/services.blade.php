@@ -1,4 +1,4 @@
-@extends("layouts.masterservice")
+@extends("layouts.master")
 
 @section("content")
     <div id="inputForm">

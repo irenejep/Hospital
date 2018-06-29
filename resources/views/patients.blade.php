@@ -8,15 +8,19 @@
             <input class= "form-control" type="hidden" name="patientId">
             </div>
             <div class="inputItems">
+            <input class= "form-control" type="hidden" name="patientName">
+            </div>
+            <div class="inputItems">
             <input class= "form-control" type="hidden" name="visitId">
             </div>
             <div class="inputItems">
                 <label>Date of visit:</label>
-                <input class='form-control' type="datetime" name="visitDate"/>
+                <input class='form-control' type="datetime" name="visitDate" placeholder="yyyy-mm-dd hh:mm:ss"/>
             </div>
             <div class="inputItems">
                 Type of visit:
                 <SELECT class='form-control'name="visitType">
+                <OPTION value="" hidden>Select type of visit</OPTION>
                 <OPTION Value="1">Insurance</OPTION>
                 <OPTION Value="2">NHIF</OPTION>
                 <OPTION Value="3">Cash</OPTION>
@@ -24,11 +28,12 @@
             </div>
             <div class="inputItems">
                 <label>Time of exit:</label>
-                <input class='form-control' type="datetime" name="visitExitTime"/>
+                <input class='form-control' type="datetime" name="visitExitTime"placeholder="yyyy-mm-dd hh:mm:ss"/>
             </div>
             <div class="inputItems">
                 Visit Status:
                 <SELECT class='form-control'name="visitStatus">
+                <OPTION value="" hidden>Select visit status</OPTION>
                 <OPTION Value="1">Done</OPTION>
                 <OPTION Value="2">In process</OPTION>
                 <OPTION Value="3">Admitted to ward</OPTION>
@@ -173,11 +178,12 @@
                 document.getElementById("visitInputForm").style.display="none";
             }
 
-            function showVisitInputForm(patient_id){
+            function showVisitInputForm(patient_id, patient_name){
                 document.getElementById("visitInputForm").style.display="block";
                 document.getElementById("inputForm").style.display="none";
                 document.getElementById("allPatients").style.display="none";
                 document.forms["visits"]["patientId"].value = patient_id;
+                document.forms["visits"]["patientName"].value = patient_name;
             }
 
             function hideInputForm(){
@@ -263,6 +269,7 @@
                 e.preventDefault();
                 //get values submitted
                 var patientId = document.forms["visits"]["patientId"].value;
+                var patientName = document.forms["visits"]["patientName"].value;
                 var visitDate = document.forms["visits"]["visitDate"].value;
                 var visitType = document.forms["visits"]["visitType"].value;
                 var visitExitTime = document.forms["visits"]["visitExitTime"].value;
@@ -270,7 +277,7 @@
                     //validate values
                 if((visitDate !="") && (visitType !="") && (visitExitTime !="") && (visitStatus !=""))
                 {
-                    var sendData = "patient_id="+patientId+"&visit_date="+visitDate+"&visit_type="+visitType+"&visit_exit_time="+visitExitTime+"&visit_status="+visitStatus;
+                    var sendData = "patient_name="+patientName+"&patient_id="+patientId+"&visit_date="+visitDate+"&visit_type="+visitType+"&visit_exit_time="+visitExitTime+"&visit_status="+visitStatus;
                     console.log(sendData);
                     createObject(getPatients, method[0], baseUrl + "saveVisit", sendData);
                     // console.log(JSON.stringify(sendData));
