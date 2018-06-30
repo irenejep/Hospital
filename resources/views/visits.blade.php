@@ -1,8 +1,6 @@
 @extends("layouts.master")
 
 @section("content")
-<body onload="getVisits">
-
     <div id="billInputForm">
         <form class="form-horizontal" action="#" method="POST"id="saveBill" name="bills">
         @csrf
@@ -129,6 +127,7 @@
                 createObject(displayVisits, method[1], baseUrl + "/getVisits");
                 document.getElementById("allVisits").style.display="block"; 
                 document.getElementById("updateForm").style.display="none";
+                document.getElementById("billInputForm").style.display="none";
             }
 
             function showVisit(visit_id){
@@ -199,7 +198,7 @@
                     txt = "You pressed Cancel!";
                 } 
             }
-            function submitVisit(e)
+            function submitBill(e)
             {
                 e.preventDefault();
                 //get values submitted
@@ -208,15 +207,15 @@
                 var amount = document.forms["bills"]["amount"].value;
                 var quantity = document.forms["bills"]["quantity"].value;
                 var billTime = document.forms["bills"]["billTime"].value;
-                var serviceId =document.forms["bills"]["serviceId"].value;
-                var serviceName = document.forms["bills"]["serviceName"].value;
+                // var serviceId =document.forms["bills"]["serviceId"].value;
+                // var serviceName = document.forms["bills"]["serviceName"].value;
                     //validate values
                 if((amount !="") && (quantity !="") && (billTime !=""))
                 {
-                    var sendData ="visit_service_id ="+visitServiceId+ "&service_id ="+serviceId+ "&visit_id ="+visitId+"&visit_service_amount ="+amount+"&quantity ="+quantity+"&visit_service_bill_time="+billTime;
-                    console.log(sendData);
+                    var sendData ="visitServiceId ="+visitServiceId+ "&service_id ="+serviceId+ "&visit_id ="+visitId+"&visit_service_amount ="+amount+"&quantity ="+quantity+"&visit_service_bill_time="+billTime;
+                    // console.log(sendData);
                     createObject(getVisits, method[0], baseUrl + "saveBill", sendData);
-                    // console.log(JSON.stringify(sendData));
+                    console.log(sendData);
                 }
                 else{
                     alert("invalid input");
@@ -224,6 +223,7 @@
             }
             
             document.getElementById("updateForm1").addEventListener("submit", updateVisit);
+            // document.getElementById("billInputForm").addEventListener("submit", updateVisit);
         </script>
 
 @endsection

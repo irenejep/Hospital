@@ -55,7 +55,7 @@ class PatientsController extends Controller
         public function webservice(){
            $config=array(
                'application_id'=>env('APPLICATION_ID'),
-               'application_secret'=>env('APLICATION_SECRET'),
+               'application_secret'=>env('APPLICATION_SECRET'),
                'application_phone'=>env('APPLICATION_PHONE')
            );
             return view('group',$config);
