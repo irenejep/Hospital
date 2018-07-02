@@ -165,7 +165,7 @@
             }
             function getPatients()
             {
-                createObject(displayPatients, method[1], baseUrl + "/getPatients");
+                createObject(displayPatients, method[1], baseUrl + "getPatients");
                 document.getElementById("allPatients").style.display="block"; 
                 document.getElementById("inputForm").style.display="none";
                 document.getElementById("updateForm").style.display="none";
