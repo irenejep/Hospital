@@ -1,7 +1,7 @@
             var method = ["POST", "GET"];
             var appUrl = "https://api.kaiza.la";
             var contenttype= ['application/json','application/x-www-form-urlencoded'];
-            function createObject(readyStateFunction, requestMethod, requestUrl,contenttype, sendData = null, refreshToken=null, accessToken = null, vars=null,)
+            function createObject(readyStateFunction, requestMethod, requestUrl,contenttype, sendData = null, refreshToken=null, accessToken = null, vars=null)
             {
                 var obj = new XMLHttpRequest();
                 obj.onreadystatechange = function(){
@@ -59,9 +59,34 @@
                 var applicationSecret=document.forms["inputform"]["applicationSecret"].value;
                 var vars = [applicationId, applicationSecret];
                 var refreshToken=responseObj.refreshToken;
-                createObject(access, method[0], appUrl +'/v1/accessToken', contenttype[0], null, refreshToken, null, vars); 
+                createObject(accessGroup, method[1], appUrl +'/v1/accessToken', contenttype[0], null, refreshToken, null, vars); 
             }
-            function access(){
+            function accessGroup(jsonResponse){
+                var responseObj = JSON.parse(jsonResponse);
+                var accessToken = responseObj.accessToken;
+                createObject(fetchGroups,method[1], appUrl + 'v1/groups?fetchAllGroups=true&showDetails=true' ,contenttype[0] , null,null, null, accessToken);
+           }
+           
+           var tableData = '';
+           tableData += "<table class='table table-bordered table-striped table-condensed'><tr><th class='text-centre'>Group Name</th><th class='text-centre'>Sub Groups</th>";
+           tableData += "<th class='text-centre'>Group Type</th><th class='text-centre'>Welcome Message</th></tr><tbody id='tbody'></tbody></table>";
+           
+           function fetchGroups(jsonResponse) {
+                var responseObj = JSON.parse(jsonResponse);
+                var groups = responseObj.groups
+                var tbody = '';
+                for (var i = 0; i < groups.length; i++) {
+                    tbody += '<tr><td>' + groups[i].groupName + '</td>';
+                    tbody += '<td>' + groups[i].hasSubGroups + '</td>';
+                    tbody += '<td>' + groups[i].groupType + '</td>';
+                    tbody += '<td>' + groups[i].welcomeMessage + '</td></tr>';
+                
+                document.getElementById('inputForm').innerHTML = tableData;
+                document.getElementById('tbody').innerHTML = tbody;
+                }
+           }
+           
+           function showGroup(){
 
            }
             document.getElementById('form').addEventListener("submit",submitPin);

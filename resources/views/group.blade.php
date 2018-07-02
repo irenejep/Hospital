@@ -1,6 +1,7 @@
 @extends("layouts.master")
 @section("content")
     <h1>Hello Kaizala</h1>
+    <div id  = "allgroups"></div>
     <div id="form">
     <form action="#" name="inputform">
     @csrf
