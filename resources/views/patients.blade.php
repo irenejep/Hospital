@@ -99,7 +99,7 @@
     <div id="allPatients"></div>
         <script type ="text/javascript">
             var method = ["POST", "GET"];
-            var baseUrl = "https://nanyukiaf-hospital-irene.azurewebsites.net/"
+            var baseUrl = "http://127.0.0.1:8000/"
             function createObject(readyStateFunction, requestMethod, requestUrl,sendData = null)
             {
                 var obj = new XMLHttpRequest();
