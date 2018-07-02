@@ -11,6 +11,7 @@
 |
 */
 //patients
+Route::get('/', 'PatientsController@patients');
 Route::get('/patients', 'PatientsController@patients');
 Route::get('/getPatients', 'PatientsController@get');
 Route::post('/savePatient','PatientsController@save');
