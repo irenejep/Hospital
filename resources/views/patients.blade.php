@@ -1,5 +1,6 @@
 @extends("layouts.master")
-
+<body onload="getPatients()">
+    
 @section("content")
 <div id="visitInputForm">
         <form class="form-horizontal" action="#" method="POST"id="saveVisit" name="visits">
@@ -99,7 +100,7 @@
     <div id="allPatients"></div>
         <script type ="text/javascript">
             var method = ["POST", "GET"];
-            var baseUrl = "http://127.0.0.1:8000/"
+            var baseUrl = "http://localhost:8000/"
             function createObject(readyStateFunction, requestMethod, requestUrl,sendData = null)
             {
                 var obj = new XMLHttpRequest();
@@ -165,13 +166,13 @@
             }
             function getPatients()
             {
-                createObject(displayPatients, method[1], baseUrl + "getPatients");
+                createObject(displayPatients, method[1], baseUrl + "/getPatients");
                 document.getElementById("allPatients").style.display="block"; 
                 document.getElementById("inputForm").style.display="none";
                 document.getElementById("updateForm").style.display="none";
                 document.getElementById("visitInputForm").style.display="none";
             }
-                console.log(getPatients());
+                
             function showInputForm(){
                 document.getElementById("inputForm").style.display="block";
                 document.getElementById("allPatients").style.display="none";
@@ -292,3 +293,5 @@
         </script>
 
 @endsection
+
+</body>

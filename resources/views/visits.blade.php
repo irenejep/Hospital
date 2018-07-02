@@ -1,5 +1,5 @@
 @extends("layouts.master")
-
+<body onload="getVisits()">
 @section("content")
     <div id="billInputForm">
         <form class="form-horizontal" action="#" method="POST"id="saveBill" name="bills">
@@ -225,5 +225,5 @@
             document.getElementById("updateForm1").addEventListener("submit", updateVisit);
             // document.getElementById("billInputForm").addEventListener("submit", updateVisit);
         </script>
-
+        </body>
 @endsection

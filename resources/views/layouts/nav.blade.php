@@ -11,7 +11,7 @@
 				<a class="nav-link" href="services" onclick="getServices">Services</a>
 			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="getVisits">Visits</a>
+				<a class="nav-link" href="visits">Visits</a>
 			</li>
 			<li class="nav-item active">
 				<a class="nav-link" href="#">Bills</a>

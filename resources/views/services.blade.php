@@ -1,5 +1,5 @@
 @extends("layouts.master")
-
+<body onload="getServices()">
 @section("content")
     <div id="inputForm">
         <form class="form-horizontal" action="#" method="POST"id="saveService" name="services">
@@ -160,5 +160,5 @@
             document.getElementById("saveService").addEventListener("submit", submitService);
             document.getElementById("updateForm1").addEventListener("submit", updateService);
         </script>
-
+        </body>
 @endsection
