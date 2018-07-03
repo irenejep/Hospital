@@ -81,12 +81,12 @@
                 for (var i = 0; i < groups.length; i++) {
                     tbody += '<tr><td>' + groups[i].groupName + '</td>';
                     tbody += '<td>' + groups[i].hasSubGroups + '</td>';
-                    tbody += '<td>' + groups.groupType + '</td>';
-                    tbody += '<td>' + groups.welcomeMessage + '</td></tr>';
+                    tbody += '<td>' + groups[i].groupType + '</td>';
+                    tbody += '<td>' + groups[i].welcomeMessage + '</td></tr>';
                 
                 document.getElementById('form').innerHTML = tableData;
                 document.getElementById('tbody').innerHTML = tbody;
-                document.getElementById("createGroup").style.display="block";
+                document.getElementById("createGroup").style.display="none";
                 }
            }
            

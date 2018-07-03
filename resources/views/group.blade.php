@@ -1,6 +1,7 @@
 @extends("layouts.master")
 <body onload = "generateRefreshToken()">
 @section("content")
+<!-- <button id='group'class='btn btn-primary btn-sm' type="submit"><b><i><i class="material-icons">verified_user</i>View all groups</i></b></button> -->
     <h3>User authentication</h3>
     <div id  = "allgroups"></div>
     <div id="form">
@@ -10,13 +11,14 @@
     <input type="hidden" name="applicationPhone" value="{{$application_phone}}"/>
     <input type="hidden" name="applicationSecret" value="{{$application_secret}}"/>
     <div class="inputItems">
-        <label>PIN:</label>
+        <label>Input pin:</label>
         <input type="text" name="pin" placeholder="input pin"/>
         <button class='btn btn-primary btn-sm' type="submit"><b><i><i class="material-icons">verified_user</i>Verify pin</i></b></button>
     </div>
     <div class="inputButtons">
     <button class='btn btn-success btn-sm ' type="button" onclick='generatePin("{{$application_id}}","{{$application_phone}}","{{$application_secret}}")'><i class="material-icons">lock</i>Generate Pin</button>
-    
+    </div>
+    <div class="inputButtons">
     </div>
     </form>
     </div>
@@ -30,14 +32,14 @@
     </div>
     <div class="inputItems">
         <label>Welcome message:</label>
-        <input type="text" name="welcomeMessage"/>
+        <input class= "form-control" class= "form-control" type="text" name="welcomeMessage"/>
     </div>
     <div class="inputItems">
         <label>Group type:</label>
-        <input type="text" name="groupType"/>
+        <input class= "form-control" type="text" name="groupType"/>
     </div>
     <div class="inputButtons">
-    <button class='btn btn-primary' type="submit">create group</button>
+    <button class='btn btn-primary btn-sm' type="submit"><i class="material-icons">group</i>Create group</button>
     </div>
     </form>
     </div>

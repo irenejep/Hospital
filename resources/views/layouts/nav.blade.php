@@ -1,4 +1,4 @@
-<p  style="font-size:24px"><i class="material-icons" style="font-size:48px;color:red">local_hospital</i><b>HOSPITAL MANAGEMENT SYSTEM</b></p>
+<p  style="font-size:48px;color:green;type:arial"><i class="material-icons" style="font-size:48px;color:red">local_hospital</i><b>HOSPITAL MANAGEMENT SYSTEM</b></p>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">

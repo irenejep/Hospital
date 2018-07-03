@@ -41,7 +41,7 @@
                 </SELECT>         
             </div>
             <div class="inputButtons">
-                <button class='btn btn-warning'type="button"onclick='getPatients()'>Cancel</button>
+                <button class='btn btn-warning'type="button"onclick='getPatients()'><i class="material-icons">cancel</i>Cancel</button>
                 <button class='btn btn-primary'type="submit"><i class='material-icons'>save</i>Save visit </button>
             </div>
         </form>
@@ -230,7 +230,7 @@
             else if(responseObj.patient_gender == 2){
                 tableData +="<td>" + "Female" + "</td>";
             }
-            tableData +="<button class='btn btn-warning'type='button' onclick='getPatients()'>Back</button>";
+            tableData +="<button class='btn btn-warning'type='button' onclick='getPatients()'><i class='fa fa-arrow-circle-left'></i>Back</button>";
             document.getElementById("allPatients").innerHTML = tableData;
          tableData +="</table>"
         }
