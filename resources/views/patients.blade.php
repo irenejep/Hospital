@@ -123,7 +123,7 @@
                 var responseObj = JSON.parse(jsonResponse);
                 var tableData = " ";
                 
-                tableData += "<button class = 'btn btn-primary' type='button' onclick= 'showInputForm()'>Add Patient</button><table class='table table-bordered table-striped table-condensed'><tr><th>id</th><th>Patient's name</th><th>ID Number</th><th>Date of Birth</th><th>Gender</th><th colspan='4' text-align='center'>Actions</th></tr>";
+                tableData += "<button class = 'btn btn-primary' type='button' onclick= 'showInputForm()'><i class='material-icons'>person_add</i>Add Patient</button><table class='table table-bordered table-striped table-condensed'><tr><th>id</th><th>Patient's name</th><th>ID Number</th><th>Date of Birth</th><th>Gender</th><th colspan='4' text-align='center'>Actions</th></tr>";
 
                 for (x in responseObj){
                 tableData +="<tr><td>" + responseObj[x].patient_id + "</td>";
@@ -157,8 +157,8 @@
                 tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showVisitInputForm(" + responseObj[x].patient_id + ")'>Create Visit</a></td>";
                 tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showPatient(" + responseObj[x].patient_id + ")'>View</a></td>";
                 tableData +="<td><a href='#' class= 'btn btn-success btn-sm' onclick='editPatient("+ responseObj[x].patient_id +",\""+ responseObj[x].patient_fullname +"\",\""+ responseObj[x].patient_national_id +"\",\""+ responseObj[x].patient_dob +"\",\""+ responseObj[x].patient_gender+
-                "\")'>Edit</a></td>";
-                tableData +="<td><a href='#' class= 'btn btn-danger btn-sm'onclick='deletePatient(" + responseObj[x].patient_id + ",\"" + responseObj[x].patient_fullname + "\")'>Delete</a></td>";
+                "\")'><i class=\"material-icons\">edit</i>Edit</a></td>";
+                tableData +="<td><a href='#' class= 'btn btn-danger btn-sm'onclick='deletePatient(" + responseObj[x].patient_id + ",\"" + responseObj[x].patient_fullname + "\")'><i class=\"material-icons\">delete</i>Delete</a></td>";
                 } 
                 "</table>";
                 document.getElementById("allPatients").innerHTML = tableData;
