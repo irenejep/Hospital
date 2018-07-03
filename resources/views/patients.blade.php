@@ -42,7 +42,7 @@
             </div>
             <div class="inputButtons">
                 <button class='btn btn-warning'type="button"onclick='getPatients()'>Cancel</button>
-                <button class='btn btn-primary'type="submit">Save visit </button>
+                <button class='btn btn-primary'type="submit"><i class='material-icons'>save</i>Save visit </button>
             </div>
         </form>
     </div>
@@ -74,7 +74,7 @@
             </div>
             <div class="inputButtons">
                 <button class='btn btn-warning'type="button"onclick='getPatients()'>Cancel</button>
-                <button class='btn btn-primary'type="submit">Save Patient</button>
+                <button class='btn btn-primary'type="submit"><i class='material-icons'>save</i>Save Patient</button>
             </div>
         </form>
     </div>
@@ -154,8 +154,8 @@
                 else if(responseObj[x].visit_status == 3){
                 tableData +="<td>" + "Admitted to ward" + "</td>";
                 }
-                tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showVisitInputForm(" + responseObj[x].patient_id + ")'>Create Visit</a></td>";
-                tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showPatient(" + responseObj[x].patient_id + ")'>View</a></td>";
+                tableData +="<td><a href='#' class='btn btn-primary btn-sm' onclick= 'showVisitInputForm(" + responseObj[x].patient_id + ")'><i class='material-icons'>add</i>Create Visit</a></td>";
+                tableData +="<td><a href='#' class='btn btn-info btn-sm' onclick= 'showPatient(" + responseObj[x].patient_id + ")'><i class='material-icons'>open_in_new</i>View</a></td>";
                 tableData +="<td><a href='#' class= 'btn btn-success btn-sm' onclick='editPatient("+ responseObj[x].patient_id +",\""+ responseObj[x].patient_fullname +"\",\""+ responseObj[x].patient_national_id +"\",\""+ responseObj[x].patient_dob +"\",\""+ responseObj[x].patient_gender+
                 "\")'><i class=\"material-icons\">edit</i>Edit</a></td>";
                 tableData +="<td><a href='#' class= 'btn btn-danger btn-sm'onclick='deletePatient(" + responseObj[x].patient_id + ",\"" + responseObj[x].patient_fullname + "\")'><i class=\"material-icons\">delete</i>Delete</a></td>";
