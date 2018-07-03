@@ -16,7 +16,7 @@
                 <input class='form-control' type="text" name="serviceAmount"/>
             </div>
             <div class="inputButtons">
-                <button class='btn btn-warning'type="button"onclick='getServices()'>Cancel</button>
+                <button class='btn btn-warning'type="button"onclick='getServices()'>Cancel<i class="material-icons">cancel</i></button>
                 <button class='btn btn-primary'type="submit">Save Service </button>
             </div>
         </form>
@@ -31,7 +31,7 @@
             <label>Amount:</label>
             <input class='form-control' type="text" name="serviceAmount"/>   
             <button class='btn btn-info' type="submit">Update</button>
-            <button class='btn btn-warning'type="button" onclick="hideInputForm()">Cancel</button>
+            <button class='btn btn-warning'type="button" onclick="hideInputForm()">Cancel<i class="material-icons">cancel</i></button>
         </form>
     </div>
 

@@ -93,8 +93,8 @@
                     <OPTION Value="1">Male</OPTION>
                     <OPTION Value="2">Female</OPTION>
                     </SELECT>         
-            <button class='btn btn-info' type="submit">Update</button>
-            <button class='btn btn-warning'type="button" onclick="hideInputForm()">Cancel</button>
+            <button class='btn btn-info' type="submit"><i class="material-icons">update</i>Update</button>
+            <button class='btn btn-warning'type="button" onclick="hideInputForm()">Cancel<i class="material-icons">cancel</i></button>
         </form>
     </div>
     <div id="allPatients"></div>

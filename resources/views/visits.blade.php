@@ -59,7 +59,7 @@
                 </SELECT>         
             </div>       
             <button class='btn btn-info' type="submit">Update</button>
-            <button class='btn btn-warning'type="button" onclick="getVisits()">Cancel</button>
+            <button class='btn btn-warning'type="button" onclick="getVisits()">Cancel<i class="material-icons">cancel</i></button>
         </form>
     </div>
     <div id="allVisits"></div>

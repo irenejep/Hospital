@@ -12,10 +12,11 @@
     <div class="inputItems">
         <label>PIN:</label>
         <input type="text" name="pin" placeholder="input pin"/>
+        <button class='btn btn-primary btn-sm' type="submit"><b><i><i class="material-icons">person_add</i>Verify pin</i></b></button>
     </div>
     <div class="inputButtons">
-    <button class='btn btn-primary' type="button" onclick='generatePin("{{$application_id}}","{{$application_phone}}","{{$application_secret}}")'>Generate Pin</button>
-    <button class='btn btn-primary' type="submit"><b><i>Verify pin</i></b></button>
+    <button class='btn btn-success btn-sm ' type="button" onclick='generatePin("{{$application_id}}","{{$application_phone}}","{{$application_secret}}")'>Generate Pin</button>
+    
     </div>
     </form>
     </div>
