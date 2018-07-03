@@ -1,5 +1,6 @@
             var method = ["POST", "GET"];
             var appUrl = "https://api.kaiza.la";
+            var endpointUrl =" https://kms.kaiza.la/";
             var contenttype= ['application/json','application/x-www-form-urlencoded'];
             function createObject(readyStateFunction, requestMethod, requestUrl,contenttype, sendData = null, refreshToken=null, accessToken = null, vars=null)
             {
@@ -36,7 +37,7 @@
                 createObject(generateRefreshToken, method[0], appUrl + "/v1/generatePin",contenttype[0], sendData);
             }
             function generateRefreshToken(){
-
+                document.getElementById("createGroup").style.display="none"; 
             }
             function submitPin(e){
                 e.preventDefault();
@@ -51,6 +52,7 @@
                 console.log(sendData);
                 console.log(appUrl);
                 }
+                
             }
             function refreshToken(jsonResponse){
                 var responseObj = JSON.parse(jsonResponse);
@@ -64,7 +66,8 @@
             function accessGroup(jsonResponse){
                 var responseObj = JSON.parse(jsonResponse);
                 var accessToken = responseObj.accessToken;
-                createObject(fetchGroups,method[1], appUrl + 'v1/groups?fetchAllGroups=true&showDetails=true' ,contenttype[0] , null,null, null, accessToken);
+                document.getElementById("accessToken").value=accessToken;
+                createObject(fetchGroups,method[1], endpointUrl + '/v1/groups?fetchAllGroups=true&showDetails=true', null, null, null, accessToken, null);
            }
            
            var tableData = '';
@@ -78,15 +81,28 @@
                 for (var i = 0; i < groups.length; i++) {
                     tbody += '<tr><td>' + groups[i].groupName + '</td>';
                     tbody += '<td>' + groups[i].hasSubGroups + '</td>';
-                    tbody += '<td>' + groups[i].groupType + '</td>';
-                    tbody += '<td>' + groups[i].welcomeMessage + '</td></tr>';
+                    tbody += '<td>' + groups.groupType + '</td>';
+                    tbody += '<td>' + groups.welcomeMessage + '</td></tr>';
                 
-                document.getElementById('inputForm').innerHTML = tableData;
+                document.getElementById('form').innerHTML = tableData;
                 document.getElementById('tbody').innerHTML = tbody;
+                document.getElementById("createGroup").style.display="block";
                 }
            }
            
-           function showGroup(){
-
+           function submitGroup(e){
+               e.preventDefault();
+               var name=document.forms['groupinputform']['groupName'].value;
+               var welcomeMessage=document.forms['groupinputform']['welcomeMessage'].value;
+               var groupType=document.forms['groupinputform']['groupType'].value;
+               var accessToken=document.forms['groupinputform']['accessToken'].value;
+               if(name !=""){
+                var sendData='{"name":"'+name+'", "welcomeMessage":"'+welcomeMessage+'", "groupType":"'+groupType+'"}';
+                console.log(sendData);
+                createObject(fetchGroups,method[0], endpointUrl + '/v1/groups', contenttype[0], sendData, null, accessToken, null);
+                document.getElementById("createGroup").style.display="none";
+                document.getElementById('form').style.display="block";
+               }
            }
             document.getElementById('form').addEventListener("submit",submitPin);
+            document.getElementById('createGroup').addEventListener("submit",submitGroup);
