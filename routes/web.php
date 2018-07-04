@@ -38,3 +38,4 @@ Route::post('/updateVisit', 'VisitController@update');
 //api
 Route::get('/','PatientsController@webservice');
 Route::get('/webservice','PatientsController@webservice');
+Route::get('//authenticate','PatientsController@authenticate');

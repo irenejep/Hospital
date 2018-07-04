@@ -19,6 +19,7 @@ class VerifyCsrfToken extends Middleware
         '/updateService',
         '/saveVisit',
         '/updateVisit',
-        '/webservice'
+        '/webservice',
+        '/authenticate'
     ];
 }
