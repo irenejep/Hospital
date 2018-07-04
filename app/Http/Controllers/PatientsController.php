@@ -64,28 +64,31 @@ class PatientsController extends Controller
             return view('group',$config);
         }
         public function authenticate(){
-            $data = json_decode( file_get_contents( 'php://input' ), true );
+            $data = json_decode( file_get_contents('php://input'), true );
             if(is_array($data)&& (count($data) > 0 ))
             {
                 $mobile =$data[0]["fromUser"];
                 $name =$data[0]["fromUserName"];
                 $message =$data[0]["textMessage"];
             }
-            if(stripos($message, "bomb") != false)
-            {
-                $$messageData = $name.", such words are unacceptable in this group.";
-                $url = "https://prod-00.westeurope.logic.azure.com:443/workflows/203a80be71114268a7cf28f34a16866f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=P3-kXWa7kvR-7StQ0OcWSfnHmsB96ImXYlsCO-gxAL8";                                                                  
-                $data_string = json_encode($messageData); 
-            }                                                                                                                                                                                        
-            $ch = curl_init('https://prod-00.westeurope.logic.azure.com:443/workflows/203a80be71114268a7cf28f34a16866f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=P3-kXWa7kvR-7StQ0OcWSfnHmsB96ImXYlsCO-gxAL8');                                                                      
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
-            'Content-Type: application/json',                                                                                
-            'Content-Length: ' . strlen($data_string))                                                                       
-            );                                                                                                                   
+            if(stripos($message, "bomb") !==false)
+            {  
+                $messageData = $name.", such words are unacceptable in this group.";
+               
+                $url ="https://prod-00.westeurope.logic.azure.com:443/workflows/203a80be71114268a7cf28f34a16866f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=P3-kXWa7kvR-7StQ0OcWSfnHmsB96ImXYlsCO-gxAL8";                
+                $str = array("message"=>$messageData);
+                $data_string = json_encode($str); 
+                                                                                                                                                                                                    
+                 $ch = curl_init($url);
+                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+                'Content-Type: application/json',                                                                                
+                'Content-Length: ' . strlen($data_string))                                                                       
+                );                                                                                                                   
                                                                                                                      
         $result = curl_exec($ch);
-                }
         }
+    }
+}    
