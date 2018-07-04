@@ -74,10 +74,10 @@ class PatientsController extends Controller
             if(stripos($message, "bomb") != false)
             {
                 $$messageData = $name.", such words are unacceptable in this group.";
-                $url = "https://prod-00.westeurope.logic.azure.com:443/workflows/203a80be71114268a7cf28f34a16866f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=P3-kXWa7kvR-7StQ0OcWSfnHmsB96ImXYlsCO-gxAL8/authenticate";                                                                  
+                $url = "https://prod-00.westeurope.logic.azure.com:443/workflows/203a80be71114268a7cf28f34a16866f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=P3-kXWa7kvR-7StQ0OcWSfnHmsB96ImXYlsCO-gxAL8";                                                                  
                 $data_string = json_encode($messageData); 
             }                                                                                                                                                                                        
-            $ch = curl_init('https://prod-00.westeurope.logic.azure.com:443/workflows/203a80be71114268a7cf28f34a16866f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=P3-kXWa7kvR-7StQ0OcWSfnHmsB96ImXYlsCO-gxAL8/authenticate');                                                                      
+            $ch = curl_init('https://prod-00.westeurope.logic.azure.com:443/workflows/203a80be71114268a7cf28f34a16866f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=P3-kXWa7kvR-7StQ0OcWSfnHmsB96ImXYlsCO-gxAL8');                                                                      
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
