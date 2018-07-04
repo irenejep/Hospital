@@ -72,18 +72,19 @@
            
            var tableData = '';
            tableData += "<table class='table table-bordered table-striped table-condensed'><tr><th class='text-centre'>Group Name</th><th class='text-centre'>Sub Groups</th>";
-           tableData += "<th class='text-centre'>Group Type</th><th class='text-centre'>Welcome Message</th></tr><tbody id='tbody'></tbody></table>";
+           tableData += "<th class='text-centre'>Group Type</th><th class='text-centre'>Welcome Message</th><th class='text-centre'>Action</th></tr><tbody id='tbody'></tbody></table>";
            
            function fetchGroups(jsonResponse) {
                 var responseObj = JSON.parse(jsonResponse);
                 var groups = responseObj.groups
+                console.log(responseObj.groups);
                 var tbody = '';
                 for (var i = 0; i < groups.length; i++) {
                     tbody += '<tr><td>' + groups[i].groupName + '</td>';
                     tbody += '<td>' + groups[i].hasSubGroups + '</td>';
                     tbody += '<td>' + groups[i].groupType + '</td>';
-                    tbody += '<td>' + groups[i].welcomeMessage + '</td></tr>';
-                
+                    tbody += '<td>' + groups[i].welcomeMessage + '</td>';
+                    tbody +="<td><button class='btn btn-primary btn-sm' type='submit'><b><i>Send message</i></b></button></td></tr>"
                 document.getElementById('form').innerHTML = tableData;
                 document.getElementById('tbody').innerHTML = tbody;
                 document.getElementById("createGroup").style.display="none";
@@ -104,5 +105,32 @@
                 document.getElementById('form').style.display="block";
                }
            }
+           function sendMessage(jsonResponse){
+            var responseObj = JSON.parse(jsonResponse);
+            var groups = responseObj.groups;
+            var test_group_id=groups.groupId;
+            var message=document.forms['messageInputForm']['message'].value;
+            var sendData='{"message":"'+message+'"}';
+            console.log(sendData);
+            createObject(sendMess, method[0], endpointUrl + '/v1/groups/'+test_group_id+'/messages',contenttype[0], sendData, null, accessToken, null);
+           }
+           function sendMess(){
+            document.getElementById('form').style.display="none";
+            document.getElementById('messageInputForm').style.display="none";
+           }
+           function message(e){
+               e.preventDefault();
+               var fromuser=document.forms['messageInputForm']['fromUser'].value;
+               var fromusername=document.forms['messageInputForm']['fromUserName'].value;
+               var message=document.forms['messageInputForm']['message'].value; 
+               var textmessage=document.forms['messageInputForm']['textMessage'].value;
+               var sendData='{"message":"'+message+'"}';
+               console.log(sendData);
+               createObject(searchForKeyword,method[0], endpointUrl + '/v1/groups/f4680635-6d1c-4992-ae19-d08e378d629a/messages', contenttype[0], sendData, null, accessToken, null);
+            }
+            function searchForKeyword(){
+
+            }
             document.getElementById('form').addEventListener("submit",submitPin);
             document.getElementById('createGroup').addEventListener("submit",submitGroup);
+            document.getElementById('messageInput').addEventListener("submit",message);

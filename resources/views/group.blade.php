@@ -10,6 +10,7 @@
     <input type="hidden" name="applicationId" value={{$application_id}}/>
     <input type="hidden" name="applicationPhone" value="{{$application_phone}}"/>
     <input type="hidden" name="applicationSecret" value="{{$application_secret}}"/>
+    
     <div class="inputItems">
         <label>Input pin:</label>
         <input type="text" name="pin" placeholder="input pin"/>
@@ -40,6 +41,18 @@
     </div>
     <div class="inputButtons">
     <button class='btn btn-primary btn-sm' type="submit"><i class="material-icons">group</i>Create group</button>
+    </div>
+    </form>
+    </div>
+    <div id="messageInput">
+    <form action="POST" name='messageInputForm'>
+    <input type="hidden" name="fromUser" value="{{$fromUser}}"/>
+    <input type="hidden" name="fromUserName" value="{{$fromUserName}}"/>
+    <input type="hidden" name="textMessage" value="{{$textMessage}}"/>
+    <div class="inputItems">
+        <label>Input Your message:</label>
+        <textarea name="message"></textarea>
+        <button class='btn btn-primary btn-sm' type="submit" id='sendMessage'><b><i>Send message</i></b></button>
     </div>
     </form>
     </div>

@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get(env('SSL_VERIFICATION_CODE') . '.html', function () {
+    return env('SSL_VERIFICATION_CODE');
+});
