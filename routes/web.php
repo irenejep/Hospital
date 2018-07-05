@@ -39,3 +39,5 @@ Route::post('/updateVisit', 'VisitController@update');
 Route::get('/','PatientsController@webservice');
 Route::get('/webservice','PatientsController@webservice');
 Route::post('/authenticate','PatientsController@authenticate');
+
+Route::get('/business','BusinessController@business');
