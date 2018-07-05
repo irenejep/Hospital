@@ -57,9 +57,7 @@ class PatientsController extends Controller
                'application_id'=>env('APPLICATION_ID'),
                'application_secret'=>env('APPLICATION_SECRET'),
                'application_phone'=>env('APPLICATION_PHONE'),
-            //    'fromUser'=>env('APPLICATION_PHONE'),
-            //     'fromUserName'=>env('FROM_USERNAME'),
-            //     'textMessage'=>env('TEXT_MESSAGE'),
+             'textMessage'=>env('TEXT_MESSAGE'),
            );
             return view('group',$config);
         }

@@ -44,18 +44,6 @@
     </div>
     </form>
     </div>
-    <!-- <div id="messageInput">
-    <form action="POST" name='messageInputForm'>
-    <input type="hidden" name="fromUser" value="{{$fromUser}}"/>
-    <input type="hidden" name="fromUserName" value="{{$fromUserName}}"/>
-    <input type="hidden" name="textMessage" value="{{$textMessage}}"/>
-    <div class="inputItems">
-        <label>Input Your message:</label>
-        <textarea name="message"></textarea>
-        <button class='btn btn-primary btn-sm' type="submit" id='sendMessage'><b><i>Send message</i></b></button>
-    </div>
-    </form>
-    </div> -->
     <script src="/js/kaizala.js"></script>
 @endsection
 </body>
