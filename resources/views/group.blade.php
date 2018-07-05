@@ -44,7 +44,7 @@
     </div>
     </form>
     </div>
-    <div id="messageInput">
+    <!-- <div id="messageInput">
     <form action="POST" name='messageInputForm'>
     <input type="hidden" name="fromUser" value="{{$fromUser}}"/>
     <input type="hidden" name="fromUserName" value="{{$fromUserName}}"/>
@@ -55,7 +55,7 @@
         <button class='btn btn-primary btn-sm' type="submit" id='sendMessage'><b><i>Send message</i></b></button>
     </div>
     </form>
-    </div>
+    </div> -->
     <script src="/js/kaizala.js"></script>
 @endsection
 </body>
