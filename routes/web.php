@@ -40,4 +40,4 @@ Route::get('/','PatientsController@webservice');
 Route::get('/webservice','PatientsController@webservice');
 Route::post('/authenticate','PatientsController@authenticate');
 
-Route::get('/business','BusinessController@business');
+Route::post('/business','BusinessController@business');
