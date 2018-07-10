@@ -41,3 +41,4 @@ Route::get('/webservice','PatientsController@webservice');
 Route::post('/authenticate','PatientsController@authenticate');
 
 Route::get('/business','BusinessController@business');
+Route::get('/tesJson','BusinessController@tesJson');
