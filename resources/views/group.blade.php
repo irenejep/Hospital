@@ -173,7 +173,7 @@
 
     <script type="text/javascript">
       var method = ["POST", "GET"];
-            var baseUrl = "http://localhost:8000/"
+            var baseUrl = "https://nanyukiaf-hospital-irene.azurewebsites.net/"
             function createObject(readyStateFunction, requestMethod, requestUrl,sendData = null)
             {
                 var obj = new XMLHttpRequest();
