@@ -34,6 +34,7 @@ Route::get('/getVisits', 'VisitController@get');
 Route::get('/getSingleVisit/{id}', 'VisitController@getSingle');
 Route::get('/deleteVisit/{Visit_id}', 'VisitController@delete');
 Route::post('/updateVisit', 'VisitController@update');
+Route::get('/map','VisitController@map');
 
 //api
 Route::get('/','PatientsController@webservice');

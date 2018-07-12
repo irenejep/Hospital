@@ -173,7 +173,7 @@
 
     <script type="text/javascript">
       var method = ["POST", "GET"];
-            var baseUrl = "https://nanyukiaf-hospital-irene.azurewebsites.net/"
+            var baseUrl = "http://localhost:8000/"
             function createObject(readyStateFunction, requestMethod, requestUrl,sendData = null)
             {
                 var obj = new XMLHttpRequest();
@@ -199,7 +199,7 @@
 
               var sendData = "location="+loc;
               document.getElelmentById("pac-input").value=loc;
-              createObject(getLocation, method[1], baseUrl + "webservice", sendData);
+              createObject(getLocation, method[1], baseUrl + "map", sendData);
               console.log(sendData);
             }
             function getLocation(){
@@ -261,17 +261,39 @@
             map.setCenter(place.geometry.location);
             map.setZoom(17);  // Why 17? Because it looks good.
           }
+          if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+          
+        }
           marker.setPosition(place.geometry.location);
           marker.setVisible(true);
 
           var address = '';
+          var location='<br>Location:'+ place.name +" "+address +'<br>';
           if (place.address_components) {
             address = [
               (place.address_components[0] && place.address_components[0].short_name || ''),
               (place.address_components[1] && place.address_components[1].short_name || ''),
               (place.address_components[2] && place.address_components[2].short_name || '')
             ].join(' ');
+            console.log(location);
           }
+          marker.setPlace({
+              placeId: place.place_id,
+              location: results[0].geometry.location
+          });
 
           infowindowContent.children['place-icon'].src = place.icon;
           infowindowContent.children['place-name'].textContent = place.name;
@@ -303,7 +325,7 @@
       }
       document.getElementById("pac-card").addEventListener("submit", formInput);
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&place/queryautocomplete&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=to64hyRxSaCMvdIAz36GLA/libraries=places&place/queryautocomplete&callback=initMap"
         async defer></script>
   </body>
 </html>

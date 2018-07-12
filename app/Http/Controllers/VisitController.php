@@ -59,4 +59,9 @@ class VisitController extends Controller
             $visit = Visit::all();
             echo $visit;
         }
+        public function map(Request $request, $location)
+        {
+            $name = $request->input('location');
+            return $name; 
+        }
 }
