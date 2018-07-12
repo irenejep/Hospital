@@ -325,7 +325,7 @@
       }
       document.getElementById("pac-card").addEventListener("submit", formInput);
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=to64hyRxSaCMvdIAz36GLA/libraries=places&place/queryautocomplete&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=LBgDCZD1QLW1R1n5rYt7/libraries=places&place/queryautocomplete&callback=initMap"
         async defer></script>
   </body>
 </html>
