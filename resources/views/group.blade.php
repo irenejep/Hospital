@@ -199,16 +199,16 @@
 
               var sendData = "location="+loc;
               document.getElelmentById("pac-input").value=loc;
-              createObject(getLocation, method[1], baseUrl + "map", sendData);
+              createObject(getLocation, method[1], baseUrl, sendData);
               console.log(sendData);
             }
             function getLocation(){
              
             }
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
+            document.getElementById("title").addEventListener("submit", formInput);
+            </script>
+  
+      <script type= "text/javascript">
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -33.8688, lng: 151.2195},
@@ -231,8 +231,6 @@
         // Set the data fields to return when the user selects a place.
         autocomplete.setFields(
             ['address_components', 'geometry', 'icon', 'name']);
-            // var worldCoordinate = project(latLng);
-
 
         var infowindow = new google.maps.InfoWindow();
         var infowindowContent = document.getElementById('infowindow-content');
@@ -250,7 +248,6 @@
             // User entered the name of a Place that was not suggested and
             // pressed the Enter key, or the Place Details request failed.
             window.alert("No details available for input: '" + place.name + "'");
-            console.log(autocomplete.getPlace());
             return;
           }
 
@@ -261,39 +258,17 @@
             map.setCenter(place.geometry.location);
             map.setZoom(17);  // Why 17? Because it looks good.
           }
-          if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-          
-        }
           marker.setPosition(place.geometry.location);
           marker.setVisible(true);
 
           var address = '';
-          var location='<br>Location:'+ place.name +" "+address +'<br>';
           if (place.address_components) {
             address = [
               (place.address_components[0] && place.address_components[0].short_name || ''),
               (place.address_components[1] && place.address_components[1].short_name || ''),
               (place.address_components[2] && place.address_components[2].short_name || '')
             ].join(' ');
-            console.log(location);
           }
-          marker.setPlace({
-              placeId: place.place_id,
-              location: results[0].geometry.location
-          });
 
           infowindowContent.children['place-icon'].src = place.icon;
           infowindowContent.children['place-name'].textContent = place.name;
@@ -320,12 +295,11 @@
               console.log('Checkbox clicked! New state=' + this.checked);
               autocomplete.setOptions({strictBounds: this.checked});
             });
-      
-            document.getElementById("map").style.display="none";
+            document.getElementById('map').style.display="none";
       }
-      document.getElementById("pac-card").addEventListener("submit", formInput);
+       
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhrfux3x4dyb_kJNmaN3ubXiUg1SLq7BE/libraries=places&place/queryautocomplete&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhrfux3x4dyb_kJNmaN3ubXiUg1SLq7BE&libraries=places&callback=initMap"
         async defer></script>
   </body>
 </html>
