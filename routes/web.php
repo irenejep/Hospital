@@ -43,3 +43,5 @@ Route::post('/authenticate','PatientsController@authenticate');
 
 Route::get('/business','BusinessController@business');
 Route::get('/tesJson','BusinessController@tesJson');
+Route::get('/infomoby.$keyword."/".$location."/".$lat."/".$lng."/0/16"','KaizalaController@infomoby');
+

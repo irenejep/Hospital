@@ -162,6 +162,8 @@
             <label id="label">
             <button class='btn btn-primary'type="submit">submit</button>
       </div>
+      <div id="long">
+      </div>
     </div>
     </form>
     <div id="map"></div>
@@ -195,7 +197,7 @@
             }
             function formInput(e){
               e.preventDefault();
-              var loc =documents.forms["inputForm"]["location"].value;
+              var loc =document.forms["inputForm"]["location"].value;
 
               var sendData = "location="+loc;
               document.getElelmentById("pac-input").value=loc;
@@ -203,6 +205,7 @@
               console.log(sendData);
             }
             function getLocation(){
+              document.getElementById("title").style.display="none";
              
             }
             document.getElementById("title").addEventListener("submit", formInput);
@@ -222,11 +225,13 @@
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
         var autocomplete = new google.maps.places.Autocomplete(input);
+        console.log(input);
 
         // Bind the map's bounds (viewport) property to the autocomplete object,
         // so that the autocomplete requests use the current map bounds for the
         // bounds option in the request.
         autocomplete.bindTo('bounds', map);
+        console.log(autocomplete);
 
         // Set the data fields to return when the user selects a place.
         autocomplete.setFields(
@@ -244,13 +249,19 @@
           infowindow.close();
           marker.setVisible(false);
           var place = autocomplete.getPlace();
+          // var location ="<b>Location<b>: " +place.name+ address +"<br>";
+          // location += "<b>Latitude<b>: " +place.geometry.location.A+"<br>";
+          // location += "<b>Longitude<b>: " +place.geometry.location.F+"<br>";
+          // document.getElementById("long").innerHTML=location;
           if (!place.geometry) {
             // User entered the name of a Place that was not suggested and
             // pressed the Enter key, or the Place Details request failed.
             window.alert("No details available for input: '" + place.name + "'");
+            var locationname=place.name;
+            console.log(locationname);
             return;
           }
-
+          
           // If the place has a geometry, then present it on a map.
           if (place.geometry.viewport) {
             map.fitBounds(place.geometry.viewport);
@@ -268,13 +279,22 @@
               (place.address_components[1] && place.address_components[1].short_name || ''),
               (place.address_components[2] && place.address_components[2].short_name || '')
             ].join(' ');
+         
           }
-
+          // var locationname=place.name +address;
           infowindowContent.children['place-icon'].src = place.icon;
           infowindowContent.children['place-name'].textContent = place.name;
           infowindowContent.children['place-address'].textContent = address;
           infowindow.open(map, marker);
+          console.log(locationname);
+          var location ="<b>Location<b>: " +place.name+" "+ address +"<br>";
+          location += "<b>Latitude<b>: " +place.name.geometry.location.A+"<br>";
+          location += "<b>Longitude<b>: " +place.geometry.location.F+"<br>";
+          document.getElementById("long").innerHTML=location;
         });
+        
+            
+       
 
         // Sets a listener on a radio button to change the filter type on Places
         // Autocomplete.
