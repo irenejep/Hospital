@@ -30,6 +30,7 @@ class KaizalaController extends Controller
          curl_setopt($conn, CURLOPT_RETURNTRANSFER, true);
          
          $result = curl_exec($conn);
+         dd($result);
          curl_close($conn);
 
         $myObject = json_decode($result);
