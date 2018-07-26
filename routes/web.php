@@ -28,7 +28,7 @@ Route::get('/deleteService/{service_id}', 'ServiceController@delete');
 Route::post('/updateService', 'ServiceController@update');
 
 //visits
-Route::post('/saveVisit','VisitController@save');
+Route::get('/saveVisit','VisitController@save');
 Route::get('/visits', 'VisitController@visits');
 Route::get('/getVisits', 'VisitController@get');
 Route::get('/getSingleVisit/{id}', 'VisitController@getSingle');

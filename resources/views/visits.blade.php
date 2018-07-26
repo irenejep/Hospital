@@ -11,8 +11,12 @@
                 <input class= "form-control" type="hidden" name="visitId">
             </div>
             <div class="inputItems">
+                <label>Service Name:</label>
+                <input class='form-control' type="hidden" name="serviceName"/>
+            </div>
+            <div class="inputItems">
                 <label>Amount:</label>
-                <input class='form-control' type="datetime" name="amount" placeholder="yyyy-mm-dd hh:mm:ss"/>
+                <input class='form-control' type="hidden" name="amount"/>
             </div>
             <div class="inputItems">
                 <label>Quantity:</label>
@@ -140,9 +144,9 @@
             {
                 var responseObj = JSON.parse(jsonResponse);
                 var tData, count = 0;
-                var tableData ="<table class='table table-bordered table-striped table-condensed'><tr><th>Id</th><th>Patient Id</th><th>Visit Date</th><th>Visit type</th><th>Exit time</th><th>Status</th></tr>";
+                var tableData ="<table class='table table-bordered table-striped table-condensed'><tr><th>Visit Id</th><th>Patient Id</th><th>Visit Date</th><th>Visit type</th><th>Exit time</th><th>Status</th></tr>";
                     tableData +="<tr><td>" + responseObj.visit_id + "</td>";
-                    tableData +="<tr><td>" + responseObj.patient_id + "</td>";
+                    tableData +="<td>" + responseObj.patient_id + "</td>";
                     tableData +="<td>" + responseObj.visit_date + "</td>";
                     if(responseObj.visit_type == 1){
                         tableData +="<td>" + "Insurance" + "</td>";
