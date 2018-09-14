@@ -29,9 +29,8 @@ class VisitController extends Controller
         $visit = \DB::table('visit')
         ->join('patient', 'patient.patient_id', '=', 'visit.patient_id')
         ->select('patient.patient_name')
-        ->where ('patient.patient_id','=','patient_id')
+        ->where ('patient.patient_id','patient_id')
         ->get();
-        echo $request;
     }
     public function get(){
         echo Visit::all();

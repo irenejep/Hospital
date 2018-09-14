@@ -5,14 +5,14 @@
 <div id="visitInputForm">
         <form class="form-horizontal" action="#" method="POST"id="saveVisit" name="visits">
         @csrf
-        <div class="inputItems">
-            <input class= "form-control" type="hidden" name="patientId">
+            <div class="inputItems">
+                <input class= "form-control" type="hidden" name="patientId">
             </div>
             <div class="inputItems">
-            <input class= "form-control" type="hidden" name="patientName">
+                <input class= "form-control" type="hidden" name="patientName">
             </div>
             <div class="inputItems">
-            <input class= "form-control" type="hidden" name="visitId">
+                <input class= "form-control" type="hidden" name="visitId">
             </div>
             <div class="inputItems">
                 <label>Date of visit:</label>

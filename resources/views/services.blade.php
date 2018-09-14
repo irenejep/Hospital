@@ -1,6 +1,7 @@
 @extends("layouts.master")
-<body onload="getServices()">
+
 @section("content")
+<body onload="getServices()">
     <div id="inputForm">
         <form class="form-horizontal" action="#" method="POST"id="saveService" name="services">
         @csrf

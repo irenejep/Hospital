@@ -11,7 +11,6 @@ class BusinessController extends Controller
     //
     public function business(){
         $business_Json = file_get_contents('php://input');
-        var_dump($business_Json);
         $business_array = json_decode($business_Json);
 
         if((is_array($business_array)) && (count($business_array)>0)){
@@ -55,7 +54,7 @@ class BusinessController extends Controller
                 );                                                                                                                   
                                                                                                                      
                 $result = curl_exec($ch);
-
+                // dd($result);
 
         
             }
@@ -76,7 +75,6 @@ class BusinessController extends Controller
                                                                                                                      
                 $result = curl_exec($ch);
             }
-            dd($result);
 
         }
     public function tesJson(){
